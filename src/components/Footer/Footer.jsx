@@ -7,7 +7,7 @@ function Footer() {
         <div className="row">
           <div className="col-md-4 mb-4">
             <img
-              src="/public/logo.png"
+              src="/logo.png"
               alt="Jaman Enterprise Logo"
               width="200"
               height="150"

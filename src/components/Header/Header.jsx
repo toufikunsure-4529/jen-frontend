@@ -29,7 +29,7 @@ function Header() {
         <div className="container">
           <a className="navbar-brand" href="#">
             <img
-              src="/public/logo.png"
+              src="/logo.png"
               alt="Logo"
               width="80"
               height="70"

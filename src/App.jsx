@@ -6,7 +6,7 @@ function App() {
 
   return (
     <>
-      <p>Site is currently under maintenance. Thank you for your understanding.</p>
+      <p>Under Maintanence</p>
     </>
   )
 }

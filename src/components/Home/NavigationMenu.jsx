@@ -9,14 +9,14 @@ function NavigationMenu() {
   return (
     <>
       <div
-        className="px-1 py-2 mb-1 vw-100 text-white"
+        className="px-1 py-2 mb-1 w-100 text-white"
         style={{ backgroundColor: "#12A04E" }}
       >
         <div className="container">
-          <ul class="nav nav-pills">
-            <li class="nav-item dropdown">
+          <ul className="nav nav-pills">
+            <li className="nav-item dropdown">
               <a
-                class="nav-link dropdown-toggle text-white"
+                className="nav-link dropdown-toggle text-white"
                 data-bs-toggle="dropdown"
                 href="#"
                 role="button"
@@ -24,27 +24,27 @@ function NavigationMenu() {
               >
                 Dropdown
               </a>
-              <ul class="dropdown-menu">
+              <ul className="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a className="dropdown-item" href="#">
                     Action
                   </a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a className="dropdown-item" href="#">
                     Another action
                   </a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a className="dropdown-item" href="#">
                     Something else here
                   </a>
                 </li>
                 <li>
-                  <hr class="dropdown-divider" />
+                  <hr className="dropdown-divider" />
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a className="dropdown-item" href="#">
                     Separated link
                   </a>
                 </li>

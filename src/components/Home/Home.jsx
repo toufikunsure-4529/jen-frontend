@@ -1,4 +1,5 @@
 import React from "react";
+import PricingCard from "../Card/PricingCard";
 import HomeCursol from "./HomeCursol";
 import NavigationMenu from "./NavigationMenu";
 
@@ -8,12 +9,8 @@ function Home() {
       <div className="bg-body-tertiary">
         <NavigationMenu />
         <HomeCursol />
-        <div className="container bg-success-subtle py-3">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-          dolorum magni deserunt tempora, aut quasi laboriosam quos dolores cum
-          qui iure reiciendis esse beatae ad repudiandae omnis animi sequi
-          ipsam!
-        </div>
+        <PricingCard />
+    
       </div>
     </>
   );

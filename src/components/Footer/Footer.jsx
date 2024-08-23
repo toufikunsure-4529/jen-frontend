@@ -2,7 +2,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <div className="bg-black text-light py-5 fixed-bottom">
+    <div className="bg-black text-light pt-5 pb-1 ">
       <footer className="container">
         <div className="row">
           <div className="col-md-4 mb-4">
@@ -67,18 +67,25 @@ function Footer() {
               </li>
             </ul>
           </div>
+          <div className="col-md-2 mb-4">
+            <iframe
+              title="Google Maps"
+              width="100%"
+              className="rounded-1"
+              src="https://maps.google.com/maps?q=Jaman Enterprise
+                &output=embed"
+              style={{ border: 0 }}
+              allowFullScreen
+            ></iframe>
+          </div>
         </div>
-        {/* <div className="py-3">
-          <iframe
-            title="Google Maps"
-            width="100%"
-            height="100%"
-            className="rounded-1"
-            src="https://maps.google.com/maps?q=Hariharpara&output=embed"
-            style={{ border: 0 }}
-            allowFullScreen
-          ></iframe>
-        </div> */}
+
+        <p className="text-center">
+          Design and Developed By{" "}
+          <a href="#" className="text-success">
+            Toufik
+          </a>
+        </p>
       </footer>
     </div>
   );

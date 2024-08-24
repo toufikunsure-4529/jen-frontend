@@ -10,7 +10,7 @@ function PricingCard() {
         </div>
         <div className="bg-warning w-100" style={{ height: "3px" }}></div>
       </div>
-        <ProductCard />
+      <ProductCard />
     </>
   );
 }

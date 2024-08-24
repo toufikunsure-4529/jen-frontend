@@ -1,7 +1,7 @@
 import React from "react";
-import PricingCard from "../Card/PricingCard";
-import HomeCursol from "./HomeCursol";
-import NavigationMenu from "./NavigationMenu";
+import PricingCard from "../components/Card/PricingCard";
+import HomeCursol from "../components/Home/HomeCursol";
+import NavigationMenu from "../components/Home/NavigationMenu";
 
 function Home() {
   return (
@@ -10,7 +10,6 @@ function Home() {
         <NavigationMenu />
         <HomeCursol />
         <PricingCard />
-    
       </div>
     </>
   );

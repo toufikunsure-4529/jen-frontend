@@ -1,6 +1,6 @@
 import "bootstrap-icons/font/bootstrap-icons.css";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Header() {
   const navLink = [
@@ -22,6 +22,8 @@ function Header() {
       slug: "/contact",
     },
   ];
+
+  const navigate = useNavigate();
 
   return (
     <header>
@@ -64,7 +66,11 @@ function Header() {
               ))}
             </ul>
 
-            <button type="button" className="btn btn-outline-success">
+            <button
+              type="button"
+              className="btn btn-outline-success"
+              onClick={() => navigate("/login")}
+            >
               Login
             </button>
             <button type="button" className="btn btn-outline-warning m-lg-2">

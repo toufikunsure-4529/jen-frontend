@@ -23,46 +23,48 @@ function LoginComponets() {
           <div className="w-100">
             <form action="">
               <img
-                class="mb-4 d-none d-md-block"
+                className="mb-4 d-none d-md-block"
                 src="/logo.png"
                 alt="Jaman Enterprise"
                 width="72"
                 height="57"
               />
-              <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-              <div class="form-floating">
+              <h1 className="h5 mb-3 fw-medium">
+                Login to <span className="text-warning">Jaman Enterprise</span>
+              </h1>
+              <div className="form-floating">
                 <input
                   type="email"
-                  class="form-control"
+                  className="form-control"
                   id="floatingInput"
                   placeholder="name@example.com"
                 />
                 <label for="floatingInput">Email address</label>
               </div>
 
-              <div class="form-floating">
+              <div className="form-floating">
                 <input
                   type="password"
-                  class="form-control"
+                  className="form-control"
                   id="floatingPassword"
                   placeholder="Password"
                 />
                 <label for="floatingPassword">Password</label>
               </div>
 
-              <div class="form-check text-start my-3">
+              <div className="form-check text-start my-3">
                 <input
-                  class="form-check-input"
+                  className="form-check-input"
                   type="checkbox"
                   value="remember-me"
                   id="flexCheckDefault"
                 />
-                <label class="form-check-label" for="flexCheckDefault">
+                <label className="form-check-label" for="flexCheckDefault">
                   Remember me
                 </label>
               </div>
               <button
-                class="btn btn-primary w-100 py-2 text-uppercase"
+                className="btn btn-primary w-100 py-2 text-uppercase"
                 type="submit"
               >
                 Sign in
@@ -71,7 +73,7 @@ function LoginComponets() {
                 <Link to="#">Forgot password?</Link>
                 <Link to="/signup">Don't have an account? Sign Up</Link>
               </div>
-              <p class="mt-5 mb-3 text-body-secondary text-center">
+              <p className="mt-5 mb-3 text-body-secondary text-center">
                 &copy; Jaman Enterprise 2024
               </p>
             </form>

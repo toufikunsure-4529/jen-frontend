@@ -1,24 +1,29 @@
 import { Account, Client, ID } from "appwrite";
-import config from "../config/Config";
+import conf from "../conf/conf";
 
 
 class AuthService {
   client = new Client();
   account
   constructor() {
-    this.client.setEndpoint(config.appwriteUrl).setProject(config.appwriteProjectId)
-    this.account = new Account(this.client) // when constructor call new object method used to set end point and project id auto metic save
+    this.client.setEndpoint(conf.appwriteUrl).setProject(conf.appwriteProjectId)
+    this.account = new Account(this.client)
   }
 
 
   //create new user method
-  async createAccount({ name, email, password, mobileNo }) {
+  async createAccount({ name, email, password }) {
     try {
-      const createUser = await this.account.create(ID.unique(), name, email, password, mobileNo)
+      const createUser = await this.account.create(ID.unique(), email, password, name);
       return createUser;
     } catch (error) {
-      console.log("Error: createAccount method auth.js:", error)
+      console.log("Error: createAccount method auth.js:", error);
+      throw error; // Re-throw the error for further handling
     }
   }
 
+
 }
+
+const authServiceAppwrite = new AuthService
+export default authServiceAppwrite

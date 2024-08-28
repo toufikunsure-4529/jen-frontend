@@ -1,7 +1,48 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import authServiceAppwrite from "../../backend/appwrite/auth";
+import { login as storeLogin } from "../../store/AuthSlice";
 
 function LoginComponets() {
+  const [userData, setUserData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+    setUserData({
+      ...userData,
+      [name]: value,
+    });
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    try {
+      const session = await authServiceAppwrite.createSessionLogin(userData);
+      if (session) {
+        const userDataInfo = await authServiceAppwrite.getCurrentUser();
+        if (userDataInfo) {
+          dispatch(storeLogin({ userDataInfo }));
+        }
+        toast.success("Login Successfull");
+        navigate("/");
+      }
+    } catch (error) {
+      toast.error(error.message || "An error occurred during login.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <>
       <div className="container h-100 bg-body-tertiary d-flex justify-content-center align-items-center py-4">
@@ -21,7 +62,7 @@ function LoginComponets() {
           </div>
 
           <div className="w-100">
-            <form action="">
+            <form onSubmit={handleSubmit}>
               <img
                 className="mb-4 d-none d-md-block"
                 src="/logo.png"
@@ -36,20 +77,26 @@ function LoginComponets() {
                 <input
                   type="email"
                   className="form-control"
-                  id="floatingInput"
+                  id="floatingEmail"
+                  name="email"
+                  value={userData.email}
+                  onChange={handleOnChange}
                   placeholder="name@example.com"
                 />
-                <label for="floatingInput">Email address</label>
+                <label htmlFor="floatingEmail">Email address</label>
               </div>
 
               <div className="form-floating">
                 <input
                   type="password"
                   className="form-control"
+                  value={userData.password}
+                  name="password"
+                  onChange={handleOnChange}
                   id="floatingPassword"
                   placeholder="Password"
                 />
-                <label for="floatingPassword">Password</label>
+                <label htmlFor="floatingPassword">Password</label>
               </div>
 
               <div className="form-check text-start my-3">
@@ -59,15 +106,28 @@ function LoginComponets() {
                   value="remember-me"
                   id="flexCheckDefault"
                 />
-                <label className="form-check-label" for="flexCheckDefault">
+                <label className="form-check-label" htmlFor="flexCheckDefault">
                   Remember me
                 </label>
               </div>
               <button
                 className="btn btn-primary w-100 py-2 text-uppercase"
                 type="submit"
+                disabled={isLoading}
               >
-                Sign in
+                {isLoading ? (
+                  <>
+                    <span
+                      className="spinner-border spinner-border-sm"
+                      aria-hidden="true"
+                    ></span>
+                    <span role="status" className="text-capitalize">
+                      Please Wait...
+                    </span>
+                  </>
+                ) : (
+                  "Sign in"
+                )}
               </button>
               <div className="d-flex justify-content-between mt-2">
                 <Link to="#">Forgot password?</Link>

@@ -1,93 +1,126 @@
 import React from "react";
+import { Col, Container, Row } from "react-bootstrap";
 
 function Footer() {
   return (
-    <div className="bg-black text-light pt-5 pb-1 ">
-      <footer className="container">
-        <div className="row">
-          <div className="col-md-4 mb-4">
+    <footer className="bg-black text-light pt-5 pb-4">
+      <Container>
+        <Row className="gy-4">
+          <Col md={3} lg={2} className="text-center text-md-start">
             <img
               src="/logo.png"
               alt="Jaman Enterprise Logo"
-              width="200"
-              height="150"
-              className="img-fluid"
+              className="img-fluid mb-3"
+              style={{ maxWidth: "150px" }}
             />
-          </div>
+            <div className="d-flex justify-content-center justify-content-md-start gap-3 fs-4">
+              <a href="#" className="text-warning">
+                <i className="bi bi-instagram"></i>
+              </a>
+              <a href="#" className="text-warning">
+                <i className="bi bi-facebook"></i>
+              </a>
+              <a href="#" className="text-warning">
+                <i className="bi bi-twitter"></i>
+              </a>
+            </div>
+          </Col>
 
-          <div className="col-md-2 mb-4">
-            <h5 className="text-warning text-capitalize">Features</h5>
-            <ul>
-              <li>
+          <Col md={3} lg={2}>
+            <h5 className="text-warning text-uppercase mb-3 fs-6">Contact</h5>
+            <address className="mb-0">
+              <p className="mb-1">
+                Hariharpara, Murshidabad, West Bengal, 742166
+              </p>
+              <a className="text-success d-block" href="tel:+918001074096">
+                +91 8001074096
+              </a>
+              <a
+                className="text-success d-block"
+                href="mailto:toufiksk.ab3@gmail.com"
+              >
+                toufiksk.ab3@gmail.com
+              </a>
+            </address>
+          </Col>
+
+          <Col md={3} lg={2}>
+            <h5 className="text-warning text-uppercase mb-3 fs-6">Features</h5>
+            <ul className="list-unstyled mb-0">
+              <li className="mb-2">
                 <a href="#" className="text-success">
                   About Us
                 </a>
               </li>
-              <li>
+              <li className="mb-2">
                 <a href="#" className="text-success">
                   Contact Us
                 </a>
               </li>
             </ul>
-          </div>
+          </Col>
 
-          <div className="col-md-2 mb-4">
-            <h5 className="text-warning text-capitalize">Legal & Support</h5>
-            <ul>
-              <li>
+          <Col md={3} lg={2}>
+            <h5 className="text-warning text-uppercase mb-3 fs-6">
+              Legal & Support
+            </h5>
+            <ul className="list-unstyled mb-0">
+              <li className="mb-2">
                 <a href="#" className="text-success">
                   Return Policy
                 </a>
               </li>
-              <li>
+              <li className="mb-2">
                 <a href="#" className="text-success">
-                  Term & Condition
+                  Terms & Conditions
                 </a>
               </li>
-              <li>
+              <li className="mb-2">
                 <a href="#" className="text-success">
                   FAQ
                 </a>
               </li>
             </ul>
-          </div>
+          </Col>
 
-          <div className="col-md-2 mb-4">
-            <h5 className="text-warning text-capitalize">Resources</h5>
-            <ul>
-              <li>
+          <Col md={3} lg={2}>
+            <h5 className="text-warning text-uppercase mb-3 fs-6">Resources</h5>
+            <ul className="list-unstyled mb-0">
+              <li className="mb-2">
                 <a href="#" className="text-success">
                   Blog
                 </a>
               </li>
-              <li>
+              <li className="mb-2">
                 <a href="#" className="text-success">
                   Help Center
                 </a>
               </li>
             </ul>
-          </div>
-          <div className="col-md-2 mb-4">
+          </Col>
+
+          <Col md={12} lg={2} className="text-center text-md-start">
             <iframe
               title="Google Maps"
               width="100%"
-              className="rounded-1"
-              src="https://maps.google.com/maps?q=Jaman Enterprise
-                &output=embed"
-              style={{ border: 0 }}
+              height="150"
+              className="rounded-1 border-0"
+              src="https://maps.google.com/maps?q=Jaman Enterprise&output=embed"
               allowFullScreen
             ></iframe>
-          </div>
-        </div>
+          </Col>
+        </Row>
 
-        <p className="text-center">
-          Design and Developed By{" "}
-          <a href="#" className="text-success">
+        <hr className="border-secondary my-4" />
+
+        <p className="text-center mb-0">
+          Designed and Developed by{" "}
+          <a href="#" className="text-success fw-bold">
             Toufik
           </a>
         </p>
-      </footer>
-    </div>
+      </Container>
+    </footer>
   );
 }
 

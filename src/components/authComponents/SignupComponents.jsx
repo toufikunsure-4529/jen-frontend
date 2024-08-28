@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import authServiceAppwrite from "../../backend/appwrite/auth";
 
 function SignupComponents() {
@@ -10,6 +11,9 @@ function SignupComponents() {
     password: "",
     confirmPassword: "",
   });
+
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,6 +30,7 @@ function SignupComponents() {
       return;
     }
 
+    setIsLoading(true);
     try {
       // Pass only the necessary fields to createAccount
       const accountData = await authServiceAppwrite.createAccount({
@@ -37,10 +42,13 @@ function SignupComponents() {
 
       if (accountData) {
         console.log("Form data:", formData);
-        alert("Signup successful");
+        toast.success("Signup successful Please Login to Continue!");
+        navigate("/login");
       }
     } catch (error) {
-      alert(error);
+      toast.error(error.message || "An error occurred during login.");
+    } finally {
+      setIsLoading(false);
     }
 
     // Clear input fields after form submission
@@ -169,9 +177,23 @@ function SignupComponents() {
             <button
               className="btn btn-primary w-100 py-2 text-uppercase"
               type="submit"
+              disabled={isLoading}
             >
-              Sign Up
+              {isLoading ? (
+                <>
+                  <span
+                    className="spinner-border spinner-border-sm"
+                    aria-hidden="true"
+                  ></span>
+                  <span role="status" className="text-capitalize">
+                    Please Wait...
+                  </span>
+                </>
+              ) : (
+                "Sign Up"
+              )}
             </button>
+
             <Link to="/login">Already have an account? Sign in</Link>
             <p className="mt-5 mb-3 text-body-secondary text-center">
               &copy; Jaman Enterprise 2024

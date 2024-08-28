@@ -1,6 +1,10 @@
 import "bootstrap-icons/font/bootstrap-icons.css";
-import React from "react";
+import "bootstrap/dist/js/bootstrap.bundle.min"; // Import Bootstrap JS for offcanvas functionality
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import CartOffcanvas from "../ItemCart/CartOffcanvas";
+import LogoutMenu from "./LogoutMenu";
 
 function Header() {
   const navLink = [
@@ -23,13 +27,24 @@ function Header() {
     },
   ];
 
+  const authStatus = useSelector((state) => state.auth.status);
+
   const navigate = useNavigate();
+  const [isCartOffCanvasOpen, setIsCartOffcanvasOpen] = useState(false);
+
+  const handleCartButtonClick = () => {
+    setIsCartOffcanvasOpen(true);
+  };
+
+  const handleCloseOffcanvas = () => {
+    setIsCartOffcanvasOpen(false);
+  };
 
   return (
     <header>
-      <nav className="navbar navbar-expand-lg">
+      <nav className="navbar navbar-expand-lg ">
         <div className="container">
-          <a className="navbar-brand" href="#">
+          <a className="navbar-brand" href="/">
             <img
               src="/logo.png"
               alt="Logo"
@@ -65,20 +80,38 @@ function Header() {
                 </li>
               ))}
             </ul>
-
             <button
               type="button"
-              className="btn btn-outline-success"
-              onClick={() => navigate("/login")}
+              className="btn btn-outline-warning m-lg-2"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#cartOffcanvas"
+              aria-controls="cartOffcanvas"
+              onClick={handleCartButtonClick}
             >
-              Login
-            </button>
-            <button type="button" className="btn btn-outline-warning m-lg-2">
               Cart <i className="bi bi-cart-plus"></i>
             </button>
+
+            {authStatus ? (
+              <div>
+                {" "}
+                <LogoutMenu />
+              </div>
+            ) : (
+              <button
+                type="button"
+                className="btn btn-outline-success"
+                onClick={() => navigate("/login")}
+              >
+                Login
+              </button>
+            )}
           </div>
         </div>
       </nav>
+      <CartOffcanvas
+        isOpen={isCartOffCanvasOpen}
+        onClose={handleCloseOffcanvas}
+      />
     </header>
   );
 }

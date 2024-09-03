@@ -40,6 +40,8 @@ function Header() {
     setIsCartOffcanvasOpen(false);
   };
 
+  const cartCount = useSelector((state) => state.cart.cartItem);
+
   return (
     <header>
       <nav className="navbar navbar-expand-lg ">
@@ -88,7 +90,10 @@ function Header() {
               aria-controls="cartOffcanvas"
               onClick={handleCartButtonClick}
             >
-              Cart <i className="bi bi-cart-plus"></i>
+              Cart <i className="bi bi-cart-plus"></i>{" "}
+              <span class="badge text-bg-warning text-white">
+                {cartCount.length}
+              </span>
             </button>
 
             {authStatus ? (

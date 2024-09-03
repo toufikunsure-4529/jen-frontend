@@ -28,29 +28,29 @@ function LogoutMenu() {
 
   return (
     <div className="">
-      <div class="dropdown-center">
+      <div className="dropdown-center">
         <button
-          class="btn btn-success dropdown-toggle"
+          className="btn btn-success dropdown-toggle"
           type="button"
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
           {userFristName}
         </button>
-        <ul class="dropdown-menu">
+        <ul className="dropdown-menu">
           <li>
-            <a class="dropdown-item" href="#">
+            <a className="dropdown-item" href="#">
               Profile
             </a>
           </li>
           <li>
-            <a class="dropdown-item" href="#">
+            <a className="dropdown-item" href="#">
               Order
             </a>
           </li>
           <li>
             <button
-              class="dropdown-item"
+              className="dropdown-item"
               data-bs-toggle="modal"
               data-bs-target="#logoutModal"
             >

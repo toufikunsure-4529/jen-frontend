@@ -49,8 +49,8 @@ function LoginComponets() {
         <div className="form-signin w-100 m-auto d-flex gap-5">
           <div className="w-50 d-none d-sm-flex">
             <div
-              className="h-100 w-100 rounded  d-flex justify-content-center align-items-center shadow-lg"
-              style={{ backgroundColor: "currentcolor" }}
+              className="h-100 w-100 rounded bg-black bg-gradient d-flex justify-content-center align-items-center shadow-lg"
+              // style={{ backgroundColor: "currentcolor" }}
             >
               <img
                 src="/logo.png"

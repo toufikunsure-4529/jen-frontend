@@ -4,13 +4,39 @@ import ProductCard from "./ProductCard";
 function PricingCard() {
   return (
     <>
+      {/* Container for the entire card section */}
       <div className="container mb-5" id="product">
-        <div className="bg-warning w-25 text-uppercase text-white fw-medium px-2 py-2 rounded-top-pill rounded-end-pill">
-          Appliances
+        {/* Title and divider */}
+        <div className="d-flex align-items-center mb-3">
+          <div className="bg-success bg-gradient text-uppercase text-white fw-medium px-3 py-2 rounded-pill">
+            Appliances
+          </div>
+          <div className="flex-grow-1 ms-3">
+            <hr
+              className="bg-success bg-gradient m-0"
+              style={{ height: "3px" }}
+            />
+          </div>
         </div>
-        <div className="bg-warning w-100" style={{ height: "3px" }}></div>
+        {/* Product card */}
+        <ProductCard />
       </div>
-      <ProductCard />
+
+      {/* Repeat for additional cards */}
+      <div className="container mb-5" id="product">
+        <div className="d-flex align-items-center mb-3">
+          <div className="bg-success bg-gradient text-uppercase text-white fw-medium px-3 py-2 rounded-pill">
+            Appliances
+          </div>
+          <div className="flex-grow-1 ms-3">
+            <hr
+              className="bg-success bg-gradient m-0"
+              style={{ height: "3px" }}
+            />
+          </div>
+        </div>
+        <ProductCard />
+      </div>
     </>
   );
 }

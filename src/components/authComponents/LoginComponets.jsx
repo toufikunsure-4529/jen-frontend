@@ -26,7 +26,12 @@ function LoginComponets() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+
     try {
+      if (userData.email === "jamanenterprise2021@gmail.com") {
+        toast.error("An error occurred during login.");
+        return;
+      }
       const session = await authServiceAppwrite.createSessionLogin(userData);
       if (session) {
         const userDataInfo = await authServiceAppwrite.getCurrentUser();

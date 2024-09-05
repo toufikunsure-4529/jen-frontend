@@ -16,7 +16,7 @@ function Layout() {
   useEffect(() => {
     setTimeout(() => {
       setPreloader(false);
-    }, 2000);
+    }, 3000);
   }, []);
 
   //Every Time Get current user info Globally

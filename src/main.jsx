@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
+
 import {
   Route,
   RouterProvider,
@@ -14,9 +15,10 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import App from "./App.jsx";
+import AdminHomeLayout from "./Layout/AdminHomeLayout.jsx";
 import AdminLoginLayout from "./Layout/AdminLoginLayout.jsx";
 import Layout from "./Layout/Layout.jsx";
-import Dashboard from "./admin-panel/components/dashboard/Dashboard.jsx";
+import Dashboard from "./admin-panel/pages-admin/Dashboard.jsx";
 import "./index.css";
 import Admin from "./pages/Admin.jsx";
 import Login from "./pages/Login.jsx";
@@ -33,7 +35,9 @@ const router = createBrowserRouter(
       </Route>
       <Route path="/admin" element={<AdminLoginLayout />}>
         <Route index element={<Admin />} />
-        <Route path="/admin/dash" element={<Dashboard />} />
+      </Route>
+      <Route path="/admin/dash" element={<AdminHomeLayout />}>
+        <Route index element={<Dashboard />} />
       </Route>
     </>
   )

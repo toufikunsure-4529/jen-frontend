@@ -14,7 +14,7 @@ function AdminHeader() {
           aria-controls="offcanvasExample"
           aria-label="Toggle sidebar"
         >
-          <i className="bi bi-list fs-3"></i>
+          <i className="bi bi-grid-3x3-gap-fill fs-3"></i>
         </button>
 
         {/* Logo/Brand */}
@@ -32,7 +32,7 @@ function AdminHeader() {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <i className="bi bi-grid-3x3-gap-fill fs-3"></i>
+          <i className="bi bi-list fs-3"></i>
         </button>
 
         {/* Navbar Content */}

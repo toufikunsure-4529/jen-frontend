@@ -18,6 +18,7 @@ import App from "./App.jsx";
 import AdminHomeLayout from "./Layout/AdminHomeLayout.jsx";
 import AdminLoginLayout from "./Layout/AdminLoginLayout.jsx";
 import Layout from "./Layout/Layout.jsx";
+import AddProduct from "./admin-panel/pages-admin/AddProduct.jsx";
 import Dashboard from "./admin-panel/pages-admin/Dashboard.jsx";
 import "./index.css";
 import Admin from "./pages/Admin.jsx";
@@ -38,6 +39,7 @@ const router = createBrowserRouter(
       </Route>
       <Route path="/admin/dash" element={<AdminHomeLayout />}>
         <Route index element={<Dashboard />} />
+        <Route path="/admin/dash/addproduct" element={<AddProduct />} />
       </Route>
     </>
   )

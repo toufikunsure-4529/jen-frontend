@@ -58,3 +58,10 @@
   padding: 20px;
   min-height: 100vh;
 }
+
+
+.productTable th,tr{
+  font-size: 12px;
+  cursor: pointer;
+}
+

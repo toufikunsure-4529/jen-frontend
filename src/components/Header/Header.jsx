@@ -91,7 +91,7 @@ function Header() {
               onClick={handleCartButtonClick}
             >
               Cart <i className="bi bi-cart-plus"></i>{" "}
-              <span class="badge text-bg-warning text-white">
+              <span className="badge text-bg-warning text-white">
                 {cartCount.length}
               </span>
             </button>

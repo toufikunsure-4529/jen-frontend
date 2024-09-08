@@ -53,6 +53,9 @@ function Dashboard() {
           </div>
         ))}
       </div>
+      <div>
+        <img src="/static-dash.png" alt="Static Dash" className=" img-fluid" />
+      </div>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
+import productServiceDBappwrite from "../../backend/appwrite/adminProductMng";
 
 function AddProductForm() {
   const [formData, setFormData] = useState({
@@ -15,44 +16,75 @@ function AddProductForm() {
     status: "",
     deliveryTime: "",
     productImg: null,
+    productImageId: "",
   });
-  const [validated, setValidated] = useState(false);
 
+  const [validated, setValidated] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  //input element value chnage methods
   const handleChange = (event) => {
     const { id, value, files } = event.target;
-    setFormData({
-      ...formData,
+    setFormData((prevFormData) => ({
+      ...prevFormData,
       [id]: files ? files[0] : value,
-    });
+    }));
   };
 
-  const handleSubmit = (event) => {
+  //user submit product to method
+  const handleSubmit = async (event) => {
     const form = event.currentTarget;
     event.preventDefault();
-
+    event.stopPropagation();
     if (form.checkValidity() === false) {
-      event.preventDefault();
+      setValidated(true);
+      return;
     }
+    setLoading(true);
 
-    if (formData) {
-      toast.success("Product Added Successfully");
-      console.log(formData);
+    try {
+      let fileId = "";
+      if (formData.productImg) {
+        const fileUploadResponse =
+          await productServiceDBappwrite.uploadProductImage(
+            formData.productImg
+          );
+        if (fileUploadResponse) {
+          fileId = fileUploadResponse.$id;
+        }
+      }
+
+      const newProductData = { ...formData, productImageId: fileId };
+
+      // Send the product data to the backend service
+      const addNewProduct = await productServiceDBappwrite.createNewProduct(
+        newProductData
+      );
+
+      if (addNewProduct) {
+        toast.success("Product Added successfully");
+        setFormData({
+          title: "",
+          slug: "",
+          brand: "",
+          manufecture: "",
+          mrpPrice: "",
+          price: "",
+          discountPercent: "",
+          description: "",
+          warranty: "",
+          status: "",
+          deliveryTime: "",
+          productImg: null,
+          productImageId: "",
+        });
+      }
+    } catch (error) {
+      toast.error(`Error adding product: ${error.message}`);
+    } finally {
+      setLoading(false);
+      setValidated(true);
     }
-    setValidated(true);
-    setFormData({
-      title: "",
-      slug: "",
-      brand: "",
-      manufecture: "",
-      mrpPrice: "",
-      price: "",
-      description: "",
-      discountPercent: "",
-      warranty: "",
-      status: "",
-      deliveryTime: "",
-      productImg: "null",
-    });
   };
 
   return (
@@ -248,7 +280,19 @@ function AddProductForm() {
               Cancel
             </button>
             <button className="btn btn-primary" type="submit">
-              Add
+              {loading ? (
+                <>
+                  <span
+                    className="spinner-border spinner-border-sm"
+                    aria-hidden="true"
+                  ></span>
+                  <span role="status" className="text-capitalize">
+                    Please Wait...
+                  </span>
+                </>
+              ) : (
+                "Add"
+              )}
             </button>
           </div>
         </form>

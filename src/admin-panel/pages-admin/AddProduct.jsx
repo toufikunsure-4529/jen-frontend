@@ -14,6 +14,8 @@ function AddProduct() {
             data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasRight"
             aria-controls="offcanvasRight"
+            title="Add Product"
+
           >
             Add Product
           </div>

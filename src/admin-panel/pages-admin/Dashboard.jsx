@@ -34,6 +34,15 @@ function Dashboard() {
 
   return (
     <div className="container">
+      <div className="d-flex align-items-center justify-content-between mb-5 ">
+        <h2 className=" fw-medium fs-5">Dashboard</h2>
+        <div className="d-flex align-items-center gap-2">
+          <div className="input-group">
+            <input type="date" className="form-control" id="datePicker" />
+          </div>
+        </div>
+      </div>
+
       <div className="row">
         {cardContent.map((cardData, index) => (
           <div className="col-12 col-md-3 mb-3" key={index}>

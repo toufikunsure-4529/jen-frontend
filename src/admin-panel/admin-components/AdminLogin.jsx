@@ -1,5 +1,9 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import authServiceAppwrite from "../../backend/appwrite/auth";
+import { login as storeLogin } from "../../store/AuthSlice";
 
 function AdminLogin() {
   const [isLoading, setIsLoading] = useState(false);
@@ -8,22 +12,34 @@ function AdminLogin() {
     email: "",
     password: "",
   });
-  const handleSubmit = (e) => {
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
 
-    setTimeout(() => {
-      if (
-        loginInfo.email === "jamanenterprise2021@gmail.com" &&
-        loginInfo.password === "1234"
-      ) {
-        toast.success("Login Successfully");
-      } else {
-        toast.error("Invalid Credentials to access the admin panel");
-      }
-
+    if (loginInfo.email !== "jamanenterprise2021@gmail.com") {
+      toast.error("Invalid credentials");
       setIsLoading(false);
-    }, 2000); // 2 second delay
+      return;
+    }
+
+    try {
+      const session = await authServiceAppwrite.createSessionLogin(loginInfo);
+      if (session) {
+        const userData = await authServiceAppwrite.getCurrentUser();
+        if (userData) {
+          dispatch(storeLogin({ userData }));
+        }
+        toast.success("Login Successfull");
+        navigate("/admin/dash/addproduct");
+      }
+    } catch (error) {
+      toast.error(error.message || "An error occurred during login.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleOnChange = (e) => {

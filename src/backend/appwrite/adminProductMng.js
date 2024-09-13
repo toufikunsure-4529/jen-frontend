@@ -16,14 +16,14 @@ class productServiceDB {
 
 
   //admin panel add new product backend methods
-  async createNewProduct({ title, slug, brand, manufecture, mrpPrice, price, discountPercent, description, warranty, status, deliveryTime, productImageId }) {
+  async createNewProduct({ title, category, slug, brand, manufecture, mrpPrice, price, discountPercent, description, warranty, status, deliveryTime, productImageId }) {
     try {
 
       return await this.database.createDocument(
         conf.appwriteDatabaseId,
         conf.appwriteProductCollectionId,
         slug,
-        { title, brand, manufecture, mrpPrice, price, discountPercent, description, warranty, status, deliveryTime, productImageId, slug }
+        { title, category, brand, manufecture, mrpPrice, price, discountPercent, description, warranty, status, deliveryTime, productImageId, slug }
       )
     } catch (error) {
       throw error

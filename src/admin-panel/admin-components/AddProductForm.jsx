@@ -5,6 +5,7 @@ import productServiceDBappwrite from "../../backend/appwrite/adminProductMng";
 function AddProductForm() {
   const [formData, setFormData] = useState({
     title: "",
+    category: "",
     slug: "",
     brand: "",
     manufecture: "",
@@ -22,7 +23,6 @@ function AddProductForm() {
   const [validated, setValidated] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  //input element value chnage methods
   const handleChange = (event) => {
     const { id, value, files } = event.target;
     setFormData((prevFormData) => ({
@@ -31,7 +31,6 @@ function AddProductForm() {
     }));
   };
 
-  //user submit product to method
   const handleSubmit = async (event) => {
     const form = event.currentTarget;
     event.preventDefault();
@@ -56,7 +55,6 @@ function AddProductForm() {
 
       const newProductData = { ...formData, productImageId: fileId };
 
-      // Send the product data to the backend service
       const addNewProduct = await productServiceDBappwrite.createNewProduct(
         newProductData
       );
@@ -65,6 +63,7 @@ function AddProductForm() {
         toast.success("Product Added successfully");
         setFormData({
           title: "",
+          category: "",
           slug: "",
           brand: "",
           manufecture: "",
@@ -88,216 +87,255 @@ function AddProductForm() {
   };
 
   return (
-    <>
-      <div className="pb-4">
-        <form
-          className={`row g-3 needs-validation ${
-            validated ? "was-validated" : ""
-          }`}
-          noValidate
-          onSubmit={handleSubmit}
-        >
-          {/* Title Input */}
-          <div className="col-md-6 form-floating mb-2">
-            <input
-              type="text"
-              className="form-control form-control-sm"
-              id="title"
-              value={formData.title}
-              onChange={handleChange}
-              required
-            />
-            <label htmlFor="title">Title</label>
-            <div className="invalid-feedback">Title is required</div>
-          </div>
+    <div className="container my-4">
+      {/* <h3 className="text-center mb-4">Add New Product</h3> */}
+      <form
+        className={`row g-4 needs-validation ${
+          validated ? "was-validated" : ""
+        }`}
+        noValidate
+        onSubmit={handleSubmit}
+      >
+        <div className="col-md-6">
+          <label htmlFor="title" className="form-label">
+            Product Title
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="title"
+            value={formData.title}
+            onChange={handleChange}
+            required
+          />
+          <div className="invalid-feedback">Please provide a title.</div>
+        </div>
 
-          {/* Slug Input */}
-          <div className="col-md-6 form-floating mb-2">
-            <input
-              type="text"
-              className="form-control form-control-sm"
-              id="slug"
-              value={formData.slug}
-              onChange={handleChange}
-              required
-            />
-            <label htmlFor="slug">Slug</label>
-            <div className="invalid-feedback">Slug is required</div>
-          </div>
+        <div className="col-md-6">
+          <label htmlFor="slug" className="form-label">
+            Slug
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="slug"
+            value={formData.slug}
+            onChange={handleChange}
+            required
+          />
+          <div className="invalid-feedback">Please provide a slug.</div>
+        </div>
 
-          {/* Brand Input */}
-          <div className="col-md-6 form-floating mb-2">
-            <input
-              type="text"
-              className="form-control form-control-sm"
-              id="brand"
-              value={formData.brand}
-              onChange={handleChange}
-              required
-            />
-            <label htmlFor="brand">Brand</label>
-            <div className="invalid-feedback">Brand is required</div>
-          </div>
+        <div className="col-md-6">
+          <label htmlFor="category" className="form-label">
+            Category
+          </label>
+          <select
+            className="form-select"
+            id="category"
+            value={formData.category}
+            onChange={handleChange}
+            required
+          >
+            <option disabled value="">
+              Select Category
+            </option>
+            <option>SURAKSHA LPG HOSE</option>
+            <option>LPG STOVES</option>
+            <option>LPG CYLINDER TROLLEY</option>
+            <option>KITCHEN & HOME APPLIANCES</option>
+            <option>FLAME LIGHTER</option>
+            <option>FLAME RETARDANT APRON</option>
+            <option>FIRE EXTINGUISHERS</option>
+          </select>
+          <div className="invalid-feedback">Please select a category.</div>
+        </div>
 
-          {/* Manufecture Input */}
-          <div className="col-md-6 form-floating mb-2">
-            <input
-              type="text"
-              className="form-control form-control-sm"
-              id="manufecture"
-              value={formData.manufecture}
-              onChange={handleChange}
-              required
-            />
-            <label htmlFor="manufecture">Manufecture</label>
-            <div className="invalid-feedback">Manufecture is required</div>
-          </div>
+        <div className="col-md-6">
+          <label htmlFor="brand" className="form-label">
+            Brand
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="brand"
+            value={formData.brand}
+            onChange={handleChange}
+            required
+          />
+          <div className="invalid-feedback">Please provide a brand.</div>
+        </div>
 
-          {/* MRP Price Input */}
-          <div className="col-md-6 form-floating mb-2">
-            <input
-              type="number"
-              className="form-control form-control-sm"
-              id="mrpPrice"
-              value={formData.mrpPrice}
-              onChange={handleChange}
-              required
-            />
-            <label htmlFor="mrpPrice">MRP</label>
-            <div className="invalid-feedback">MRP is required</div>
-          </div>
+        <div className="col-md-6">
+          <label htmlFor="manufecture" className="form-label">
+            Manufacturer
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="manufecture"
+            value={formData.manufecture}
+            onChange={handleChange}
+            required
+          />
+          <div className="invalid-feedback">Please provide a manufacturer.</div>
+        </div>
 
-          {/* Price Input */}
-          <div className="col-md-6 form-floating mb-2">
-            <input
-              type="number"
-              className="form-control form-control-sm"
-              id="price"
-              value={formData.price}
-              onChange={handleChange}
-              required
-            />
-            <label htmlFor="price">Price</label>
-            <div className="invalid-feedback">Price is required</div>
-          </div>
+        <div className="col-md-6">
+          <label htmlFor="mrpPrice" className="form-label">
+            MRP
+          </label>
+          <input
+            type="number"
+            className="form-control"
+            id="mrpPrice"
+            value={formData.mrpPrice}
+            onChange={handleChange}
+            required
+          />
+          <div className="invalid-feedback">Please provide the MRP.</div>
+        </div>
 
-          {/* Description Input */}
-          <div className="col-md-12 form-floating mb-2">
-            <textarea
-              className="form-control form-control-sm"
-              id="description"
-              value={formData.description}
-              onChange={handleChange}
-              required
-            ></textarea>
-            <label htmlFor="description">Description</label>
-            <div className="invalid-feedback">Description is required</div>
-          </div>
+        <div className="col-md-6">
+          <label htmlFor="price" className="form-label">
+            Price
+          </label>
+          <input
+            type="number"
+            className="form-control"
+            id="price"
+            value={formData.price}
+            onChange={handleChange}
+            required
+          />
+          <div className="invalid-feedback">Please provide the price.</div>
+        </div>
 
-          {/* Discount Percent Input */}
-          <div className="col-md-6 form-floating mb-2">
-            <input
-              type="number"
-              className="form-control form-control-sm"
-              id="discountPercent"
-              value={formData.discountPercent}
-              onChange={handleChange}
-              required
-            />
-            <label htmlFor="discountPercent">Discount</label>
-            <div className="invalid-feedback">Discount is required</div>
+        <div className="col-md-6">
+          <label htmlFor="discountPercent" className="form-label">
+            Discount (%)
+          </label>
+          <input
+            type="number"
+            className="form-control"
+            id="discountPercent"
+            value={formData.discountPercent}
+            onChange={handleChange}
+            required
+          />
+          <div className="invalid-feedback">
+            Please provide a discount percentage.
           </div>
+        </div>
 
-          {/* Warranty Period Input */}
-          <div className="col-md-6 form-floating mb-2">
-            <input
-              type="number"
-              className="form-control form-control-sm"
-              id="warranty"
-              value={formData.warranty}
-              onChange={handleChange}
-              required
-            />
-            <label htmlFor="warranty">Warranty Period</label>
-            <div className="invalid-feedback">Warranty is required</div>
+        <div className="col-md-6">
+          <label htmlFor="warranty" className="form-label">
+            Warranty (Months)
+          </label>
+          <input
+            type="number"
+            className="form-control"
+            id="warranty"
+            value={formData.warranty}
+            onChange={handleChange}
+            required
+          />
+          <div className="invalid-feedback">
+            Please provide the warranty period.
           </div>
+        </div>
 
-          {/* Status Dropdown */}
-          <div className="col-md-6 form-floating mb-2">
-            <select
-              className="form-select form-select-sm"
-              id="status"
-              value={formData.status}
-              onChange={handleChange}
-              required
-            >
-              <option disabled value="">
-                Choose...
-              </option>
-              <option>Listed (Not Available for customer)</option>
-              <option>Live (Customer Can search)</option>
-              <option>Out of stock</option>
-              <option>Not Available Right Now</option>
-            </select>
-            <label htmlFor="status">Status</label>
-            <div className="invalid-feedback">Status is required</div>
-          </div>
+        <div className="col-md-6">
+          <label htmlFor="status" className="form-label">
+            Status
+          </label>
+          <select
+            className="form-select"
+            id="status"
+            value={formData.status}
+            onChange={handleChange}
+            required
+          >
+            <option disabled value="">
+              Select Status
+            </option>
+            <option>Listed (Not Available for Customer)</option>
+            <option>Live (Customer Can Search)</option>
+            <option>Out of Stock</option>
+            <option>Not Available Right Now</option>
+          </select>
+          <div className="invalid-feedback">Please select a status.</div>
+        </div>
 
-          {/* Delivery Time Input */}
-          <div className="col-md-6 form-floating mb-2">
-            <input
-              type="number"
-              className="form-control form-control-sm"
-              id="deliveryTime"
-              value={formData.deliveryTime}
-              onChange={handleChange}
-              required
-            />
-            <label htmlFor="deliveryTime">Delivery Time</label>
-            <div className="invalid-feedback">Delivery Time is required</div>
-          </div>
+        <div className="col-md-6">
+          <label htmlFor="deliveryTime" className="form-label">
+            Delivery Time (Days)
+          </label>
+          <input
+            type="number"
+            className="form-control"
+            id="deliveryTime"
+            value={formData.deliveryTime}
+            onChange={handleChange}
+            required
+          />
+          <div className="invalid-feedback">Please provide delivery time.</div>
+        </div>
 
-          {/* Product Image Input */}
-          <div className="col-md-12 form-floating mb-2">
-            <input
-              type="file"
-              className="form-control form-control-sm"
-              id="productImg"
-              onChange={handleChange}
-              required
-            />
-            <label htmlFor="productImg">Upload Product Image</label>
-            <div className="invalid-feedback">Product image is required</div>
-          </div>
+        <div className="col-md-12">
+          <label htmlFor="description" className="form-label">
+            Product Description
+          </label>
+          <textarea
+            className="form-control"
+            id="description"
+            value={formData.description}
+            onChange={handleChange}
+            rows="4"
+            required
+          ></textarea>
+          <div className="invalid-feedback">Please provide a description.</div>
+        </div>
 
-          {/* Buttons */}
-          <div className="col-12 d-flex gap-2 justify-content-end">
-            <button
-              className="btn btn-danger"
-              data-bs-dismiss="offcanvas"
-              aria-label="Close"
-            >
-              Cancel
-            </button>
-            <button className="btn btn-primary" type="submit">
-              {loading ? (
-                <>
-                  <span
-                    className="spinner-border spinner-border-sm"
-                    aria-hidden="true"
-                  ></span>
-                  <span role="status" className="text-capitalize">
-                    Please Wait...
-                  </span>
-                </>
-              ) : (
-                "Add"
-              )}
-            </button>
-          </div>
-        </form>
-      </div>
-    </>
+        <div className="col-md-12">
+          <label htmlFor="productImg" className="form-label">
+            Product Image
+          </label>
+          <input
+            type="file"
+            className="form-control"
+            id="productImg"
+            onChange={handleChange}
+            required
+          />
+          <div className="invalid-feedback">Please upload a product image.</div>
+        </div>
+
+        <div className="col-12 text-end">
+          <button
+            className="btn btn-secondary me-2"
+            type="button"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          >
+            Cancel
+          </button>
+          <button className="btn btn-primary" type="submit">
+            {loading ? (
+              <>
+                <span
+                  className="spinner-border spinner-border-sm"
+                  aria-hidden="true"
+                ></span>
+                <span> Please Wait...</span>
+              </>
+            ) : (
+              "Add Product"
+            )}
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }
 

@@ -2,3 +2,8 @@ a {
   text-decoration: none;
 }
 
+/* .grayScale is productcard components used */
+.grayScale {
+  filter: grayscale(100%);
+  pointer-events: none;
+}

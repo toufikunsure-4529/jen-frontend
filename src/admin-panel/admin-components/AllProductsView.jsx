@@ -64,7 +64,7 @@ function AllProductsView() {
                       }}
                     />
                   </td>
-                  <td>Oven</td>
+                  <td>{apiData.category ? apiData.category : "NA"}</td>
                   <td>{apiData.title}</td>
                   <td>{apiData.brand}</td>
                   <td>{apiData.manufecture}</td>

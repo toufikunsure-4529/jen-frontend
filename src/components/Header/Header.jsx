@@ -30,7 +30,7 @@ function Header() {
   return (
     <header>
       <nav
-        className="navbar navbar-expand-lg navbar-dark py-1 shadow-sm "
+        className="navbar navbar-expand-lg navbar-light py-1 shadow-sm "
         style={{ backgroundColor: "azure" }}
       >
         <div className="container">
@@ -43,7 +43,7 @@ function Header() {
               className="me-2"
             />
             <span className=" fw-medium fs-6 text-dark">Jaman Enterprise</span>
-            </a>
+          </a>
           <button
             className="navbar-toggler"
             type="button"

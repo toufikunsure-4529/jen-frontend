@@ -1,5 +1,5 @@
 import "bootstrap-icons/font/bootstrap-icons.css";
-import "bootstrap/dist/js/bootstrap.bundle.min"; // Import Bootstrap JS for offcanvas functionality
+import "bootstrap/dist/js/bootstrap.bundle.min";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,29 +8,16 @@ import LogoutMenu from "./LogoutMenu";
 
 function Header() {
   const navLink = [
-    {
-      name: "Home",
-      slug: "/",
-    },
-    {
-      name: "About",
-      slug: "/about",
-    },
-
-    {
-      name: "Explore",
-      slug: "/explore",
-    },
-    {
-      name: "Contact",
-      slug: "/contact",
-    },
+    { name: "Home", slug: "/" },
+    { name: "About", slug: "/about" },
+    { name: "Explore", slug: "/explore" },
+    { name: "Contact", slug: "/contact" },
   ];
 
   const authStatus = useSelector((state) => state.auth.status);
-
   const navigate = useNavigate();
   const [isCartOffCanvasOpen, setIsCartOffcanvasOpen] = useState(false);
+  const cartCount = useSelector((state) => state.cart.cartItem);
 
   const handleCartButtonClick = () => {
     setIsCartOffcanvasOpen(true);
@@ -40,21 +27,23 @@ function Header() {
     setIsCartOffcanvasOpen(false);
   };
 
-  const cartCount = useSelector((state) => state.cart.cartItem);
-
   return (
     <header>
-      <nav className="navbar navbar-expand-lg ">
+      <nav
+        className="navbar navbar-expand-lg navbar-dark py-1 shadow-sm "
+        style={{ backgroundColor: "azure" }}
+      >
         <div className="container">
-          <a className="navbar-brand" href="/">
+          <a className="navbar-brand d-flex align-items-center" href="/">
             <img
               src="/logo.png"
               alt="Logo"
-              width="80"
-              height="70"
-              className="d-inline-block align-text-top"
+              width="50"
+              height="50"
+              className="me-2"
             />
-          </a>
+            <span className=" fw-medium fs-6 text-dark">Jaman Enterprise</span>
+            </a>
           <button
             className="navbar-toggler"
             type="button"
@@ -68,12 +57,27 @@ function Header() {
           </button>
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            {/* <!--NOTES: ms-auto className used to margin end right side shift ul element --> */}
-            <ul className="navbar-nav ms-auto mb-2 mb-lg-0 ">
+            {/* <form
+              className="d-flex mx-auto my-2 my-lg-0"
+              style={{ maxWidth: "600px", width: "100%" }}
+            >
+              <input
+                className="form-control me-2"
+                type="search"
+                placeholder="Search products..."
+                aria-label="Search"
+                style={{ padding: "0.75rem" }}
+              />
+              <button className="btn btn-warning fw-bold" type="submit">
+                Search
+              </button>
+            </form> */}
+
+            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               {navLink.map((link, index) => (
                 <li className="nav-item" key={index}>
                   <Link
-                    className="nav-link active text-capitalize text-success"
+                    className="nav-link text-dark text-uppercase mx-lg-2 fw-medium"
                     aria-current="page"
                     to={link.slug}
                   >
@@ -82,29 +86,26 @@ function Header() {
                 </li>
               ))}
             </ul>
+
             <button
               type="button"
-              className="btn btn-outline-warning m-lg-2"
-              data-bs-toggle="offcanvas"
-              data-bs-target="#cartOffcanvas"
-              aria-controls="cartOffcanvas"
+              className="btn btn-outline-dark position-relative d-flex align-items-center mx-lg-2"
               onClick={handleCartButtonClick}
+              style={{ padding: "0.2rem 1rem" }}
             >
-              Cart <i className="bi bi-cart-plus"></i>{" "}
-              <span className="badge text-bg-warning text-white">
+              <i className="bi bi-cart-fill fs-5"></i>
+              <span className="ms-2 fw-semibold">Cart</span>
+              <span className="badge bg-danger text-white position-absolute top-0 start-100 translate-middle rounded-pill">
                 {cartCount.length}
               </span>
             </button>
 
             {authStatus ? (
-              <div>
-                {" "}
-                <LogoutMenu />
-              </div>
+              <LogoutMenu />
             ) : (
               <button
                 type="button"
-                className="btn btn-outline-success"
+                className="btn btn-dark ms-lg-3 fw-semibold"
                 onClick={() => navigate("/login")}
               >
                 Login
@@ -113,6 +114,7 @@ function Header() {
           </div>
         </div>
       </nav>
+
       <CartOffcanvas
         isOpen={isCartOffCanvasOpen}
         onClose={handleCloseOffcanvas}

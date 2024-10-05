@@ -25,7 +25,10 @@ function CartOffcanvas({ isOpen, onClose }) {
         aria-labelledby="offcanvasScrollingLabel"
         style={{ visibility: isOpen ? "visible" : "hidden" }}
       >
-        <div className="offcanvas-header bg-warning text-white bg-gradient">
+        <div
+          className="offcanvas-header text-white"
+          style={{ backgroundColor: "#12335A" }}
+        >
           <img src="/logo.png" alt="Jaman Enterprise" height={50} width={50} />
           <h5 className="offcanvas-title" id="offcanvasScrollingLabel">
             Your Cart Item
@@ -68,7 +71,7 @@ function CartOffcanvas({ isOpen, onClose }) {
                     </div>
 
                     <div className="text-end">
-                      <h5 className="mb-2">${data.price}</h5>
+                      <h5 className="mb-2">₹{data.price}</h5>
                       <button className="btn btn-sm text-danger p-0">
                         <i className="bi bi-trash3"></i> Remove
                       </button>
@@ -76,12 +79,43 @@ function CartOffcanvas({ isOpen, onClose }) {
                   </div>
                 </div>
               ))}
-              <div className="d-flex justify-content-between align-items-center mt-4">
-                <h5>Total</h5>
-                <h5>$1250</h5>
+              <div className="d-flex gap-3 align-items-center mt-4">
+                <input
+                  type="text"
+                  placeholder="Enter coupon code..."
+                  className="form-control"
+                  style={{
+                    border: "1px solid #ccc",
+                    padding: "10px",
+                    borderRadius: "5px",
+                    width: "250px",
+                  }}
+                />
+                <button
+                  type="button"
+                  className="btn btn-primary  text-light"
+                  style={{
+                    borderRadius: "5px",
+                    padding: "10px 20px",
+                  }}
+                >
+                  Apply
+                </button>
               </div>
+
+              <div className="d-flex justify-content-between align-items-center mt-4">
+                <h5 className="text-black fs-6 opacity-75">Subtotal</h5>
+                <h5>₹1250</h5>
+              </div>
+              <p style={{ fontSize: "12px" }} className="text-secondary">
+                Taxes and shipping calculated at checkout
+              </p>
               <div className="d-grid gap-2">
-                <button type="button" className="btn btn-dark">
+                <button
+                  type="button"
+                  className="btn text-light"
+                  style={{ backgroundColor: "#F11928" }}
+                >
                   Checkout
                 </button>
               </div>
@@ -95,7 +129,11 @@ function CartOffcanvas({ isOpen, onClose }) {
                 ></i>
               </span>
               <h3 className="h6">Your cart is empty</h3>
-              <button className="btn btn-warning" onClick={handleBrowse}>
+              <button
+                className="btn text-light"
+                onClick={handleBrowse}
+                style={{ backgroundColor: "#F11928" }}
+              >
                 Browse Products
               </button>
             </div>

@@ -29,15 +29,16 @@ function LogoutMenu() {
   return (
     <div className="">
       <div className="dropdown-center">
-        <button
-          className="btn btn-success dropdown-toggle"
+        <a
+          className="dropdown-toggle text-light text-center"
           type="button"
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
+          {/* <i className="bi bi-person fs-5 "></i> */}
           {userFristName}
-        </button>
-        <ul className="dropdown-menu">
+        </a>
+        <ul className="dropdown-menu" style={{ left: "-80px" }}>
           <li>
             <a className="dropdown-item" href="#">
               Profile

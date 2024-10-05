@@ -9,7 +9,6 @@ function Preloader() {
         <span className="dot"></span>
         <span className="dot"></span>
       </div>
-      <p className="preloader-text mt-4">Hold on..</p>
       <style jsx>{`
         /* Preloader.css */
         .preloader-container {

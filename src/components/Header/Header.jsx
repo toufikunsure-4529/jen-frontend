@@ -1,6 +1,6 @@
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import CartOffcanvas from "../ItemCart/CartOffcanvas";
@@ -19,7 +19,7 @@ function Header() {
   const navigate = useNavigate();
   const [isCartOffCanvasOpen, setIsCartOffcanvasOpen] = useState(false);
   const cartCount = useSelector((state) => state.cart.cartItem);
-
+  const [isSticky, setIsSticky] = useState(false);
   const handleCartButtonClick = () => {
     setIsCartOffcanvasOpen(true);
   };
@@ -28,14 +28,33 @@ function Header() {
     setIsCartOffcanvasOpen(false);
   };
 
+  //sticky nav
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <header>
       <div className="d-md-block d-none">
         <TopHeader />
       </div>
       <nav
-        className="navbar navbar-expand-lg navbar-dark py-1 shadow-sm"
-        style={{ backgroundColor: "#12335A" }}
+        className={`navbar navbar-expand-lg navbar-dark py-1 shadow-sm ${
+          isSticky ? "sticky" : ""
+        }`}
+        style={{ backgroundColor: isSticky ? "black" : "#12335A" }}
       >
         <div
           className="navbar-brand  me-auto rounded-end-pill"
@@ -138,6 +157,39 @@ function Header() {
 
         .icon:hover {
           color: red;
+        }
+
+        .sticky {
+          position: fixed;
+          top: 0;
+          width: 100%;
+          z-index: 1000;
+          animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+          from {
+            top: -100px;
+          }
+          to {
+            top: 0;
+          }
+        }
+        .sticky {
+          position: fixed;
+          top: 0;
+          width: 100%;
+          z-index: 1000;
+          animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+          from {
+            top: -100px;
+          }
+          to {
+            top: 0;
+          }
         }
       `}</style>
     </header>

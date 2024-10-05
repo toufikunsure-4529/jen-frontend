@@ -68,13 +68,37 @@ function ProductCard({ category }) {
                       style={{ height: "200px", objectFit: "cover" }}
                     />
                     <div
-                      className="text-white bg-gradient bg-success px-2 d-flex py-2 align-items-center rounded-end-pill position-absolute top-0 start-0"
-                      style={{ height: "auto", width: "100px" }}
+                      className="text-white px-2 d-flex py-2 align-items-center rounded-end-pill position-absolute top-0 start-0"
+                      style={{
+                        height: "auto",
+                        width: "100px",
+                      }}
                     >
                       {item.status === "Out of Stock" ? (
-                        "Out of Stock"
+                        <span
+                          className="position-absolute top-0 start-0 badge text-bg-danger"
+                          style={{
+                            borderRadius: "0 0 10px 0",
+                            fontSize: "12px",
+                            padding: "5px 10px",
+                          }}
+                        >
+                          Out of Stock
+                        </span>
                       ) : (
-                        <>{item.discountPercent}% Off</>
+                        <>
+                          {" "}
+                          <span
+                            className="position-absolute top-0 start-0 badge text-bg-danger"
+                            style={{
+                              borderRadius: "0 0 10px 0",
+                              fontSize: "12px",
+                              padding: "5px 10px",
+                            }}
+                          >
+                            {item.discountPercent}% Off
+                          </span>
+                        </>
                       )}
                     </div>
                   </div>
@@ -96,19 +120,19 @@ function ProductCard({ category }) {
                     <p className="text-black-50" style={{ fontSize: "12px" }}>
                       {item.description}
                     </p>
-                    <div className="mb-3">
-                      <i className="bi bi-star-fill"></i>
-                      <i className="bi bi-star-fill"></i>
-                      <i className="bi bi-star-fill"></i>
-                      <i className="bi bi-star-fill"></i>
-                      <i className="bi bi-star-half"></i>
+                    <div className="rating mb-3">
+                      <i className="bi bi-star-fill text-success"></i>
+                      <i className="bi bi-star-fill text-success"></i>
+                      <i className="bi bi-star-fill text-success"></i>
+                      <i className="bi bi-star-fill text-success"></i>
+                      <i className="bi bi-star-half text-success"></i>
                     </div>
                     <div className="mt-auto d-flex justify-content-between align-items-center">
-                      <button className="btn btn-outline-danger btn-sm">
+                      <button className="btn btn-outline-primary btn-sm">
                         Add to Wishlist
                       </button>
                       <button
-                        className="btn btn-dark btn-sm"
+                        className="btn btn-sm text-light btn-primary"
                         onClick={() => addCart(item)}
                       >
                         Add to Cart

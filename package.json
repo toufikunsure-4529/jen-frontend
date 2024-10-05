@@ -12,6 +12,7 @@
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "@reduxjs/toolkit": "^2.2.7",
+    "aos": "^2.3.4",
     "appwrite": "^15.0.0",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
